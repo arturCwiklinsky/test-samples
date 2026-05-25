@@ -1,32 +1,37 @@
+package com.smartbear.appium;
+
+import io.appium.java_client.AppiumDriver;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 
 /**
  * Testdroid Image Recognition Sample Test
- *
- * @author support@bitbar.com
  */
 @ExtendWith(TestResultExtension.class)
-public class iOSSample extends AbstractAppiumTest {
+class iOSSampleTest extends AbstractAppiumTest {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(iOSSampleTest.class);
 
     @BeforeAll
-    public static void setUp() throws Exception {
+    static void setUp() throws Exception {
         driver = getIOSDriver();
     }
 
     @AfterAll
-    public static void tearDown() {
+    static void tearDown() {
         if (driver != null) {
-            log("Quitting Appium driver at tearDown");
+            LOGGER.info("Quitting Appium driver at tearDown");
             driver.quit();
         } else {
-            log("driver was null at tearDown");
+            LOGGER.warn("Driver was null at tearDown");
         }
     }
 

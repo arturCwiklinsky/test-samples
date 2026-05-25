@@ -1,3 +1,5 @@
+package com.smartbear.appium;
+
 import io.appium.java_client.AppiumDriver;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
@@ -9,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.nio.file.Paths;
 
 import static java.lang.System.getProperty;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -16,7 +19,7 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 /**
  * @author Michał Szpruta <michal.szpruta@smartbear.com>
  */
-public class TestResultExtension implements AfterTestExecutionCallback {
+class TestResultExtension implements AfterTestExecutionCallback {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TestResultExtension.class);
 
@@ -31,19 +34,16 @@ public class TestResultExtension implements AfterTestExecutionCallback {
             } else {
                 LOGGER.error("Failed test: {}#{}, details: {}", className, method, details);
             }
-
-            String fullFileName = String.format("%s/%s%s_failure.png",
-                    getProperty("user.dir"), getProperty("SCREENSHOT_FOLDER"), "_failure.png");
+            File testScreenshot = Paths.get(getProperty("user.dir"), "screenshots", "failure.png").toFile();
             try {
                 AppiumDriver driver = AbstractAppiumTest.driver;
                 File scrFile = driver.getScreenshotAs(OutputType.FILE);
-                File testScreenshot = new File(fullFileName);
                 FileUtils.copyFile(scrFile, testScreenshot);
                 LOGGER.info("Screenshot stored to {}", testScreenshot.getAbsolutePath());
                 LOGGER.info("PAGE SOURCE:");
                 LOGGER.info(driver.getPageSource());
-            } catch (IOException e2) {
-                e2.printStackTrace();
+            } catch (IOException e) {
+                LOGGER.error("Failed to save screenshot for failed test", e);
             }
         }
     }

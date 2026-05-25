@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.testdroid</groupId>
-    <artifactId>image-recognition-sample</artifactId>
-    <version>2.1</version>
+    <artifactId>appium-sample</artifactId>
+    <version>2.2</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit-jupiter.version>5.11.4</junit-jupiter.version>
-        <log4j.version>2.24.3</log4j.version>
-        <maven-artifact.version>3.9.9</maven-artifact.version>
-        <appium-java-client.version>9.4.0</appium-java-client.version>
-        <json.version>20250107</json.version>
-        <commons-io.version>2.18.0</commons-io.version>
-        <commons-lang3.version>3.17.0</commons-lang3.version>
+        <junit-jupiter.version>5.14.4</junit-jupiter.version>
+        <log4j.version>2.26.0</log4j.version>
+        <maven-artifact.version>3.9.16</maven-artifact.version>
+        <appium-java-client.version>10.1.1</appium-java-client.version>
+        <json.version>20251224</json.version>
+        <commons-io.version>2.22.0</commons-io.version>
+        <commons-lang3.version>3.20.0</commons-lang3.version>
+        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -93,7 +95,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>11</source>
                     <target>11</target>
@@ -102,7 +104,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <reportsDirectory>${project.build.directory}/reports/junit</reportsDirectory>
                 </configuration>
